@@ -1,0 +1,30 @@
+{
+  "pages" : [ {
+    "name" : "54de0c45",
+    "displayName" : "Overview",
+    "layout" : [ {
+      "widget" : {
+        "name" : "0090138f",
+        "textbox_spec" : "# Property Liked Events Report\n\nThis dashboard was created as a part of the **2025 Core Tech ZRetreat - Data Mesh Lab**. Attendees can use this dashboard to explore opportunities to visualize and derive insights from `property-liked` events ingested from the Event Platform.\n\n---\n\n\n## Organization\nThis is a high-level overview of how AI/BI Dashboards are laid out in Databricks.\n\n### Canvas\nThe **Canvas** tab provides tooling to create filters and visualizations of your data! Some samples have been provided below, feel empowered to modify these or add more with the **Chart** icon at the bottom of the page. Visualization options are documented in the [Databricks docs portal](https://docs.databricks.com/gcp/en/dashboards/visualizations/types).\n\n### Data\nThe **Data** tab includes the datasets that back the visualizations in the canvas. These datasets are named queries that can be referenced in your dashboards. A sample has been provided, but you can always add more as desired to improve or enable new visualizations, such as `Top 10 Liked Homes`."
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 0,
+        "width" : 6,
+        "height" : 7
+      }
+    }, {
+      "widget" : {
+        "name" : "3de0814c",
+        "textbox_spec" : "# Interactive Lab: Where in the US are the liked properties?\n\nBelow you will be adding a visualization that shows where each property that has been liked is around the US!\n\n---\n\n## 1) Create a Dashboard Dataset\n\n1. Navigate to the **Data** tab and click on `+ Add data` in the left toolbar.\n2. Search for the gold table you created in the first part of this workshop (`sandbox_core_tech.u_yourname.property_liked_events_gold`) and select it.\n\n## 2) Add a Visualization\n\n1. On the bottom of the screen on the current **Canvas** tab, select the **Chart** icon in order to add a visualization!\n2. Place and resize the visualization box to extend the width of the dashboard. You can configure the height to your preference.\n3. On the right side-bar, click the **Visualization** dropdown and select `Point Map`.\n4.  Add the `latitude` and `longitude` fields from your dataset to each respective coordinate configuration.\n5. Add the `COUNT(*)` measure to the size configuration. \n6. Optionally select the Title or Description checkboxes at the top of the right side-bar to add context about what you have visualized!\n\n## 3) Go wild!\n\nOnce you have created this visualization, you can feel free to play around with whatever else you want! Maybe a bar chart showing count of liked properties over time? Maybe a counter showing the average price of the each liked home? Whatever you feel compelled to add, do it!\n\n### 3.a) Dashboard Filters\nOptionally, you can click the **Filter** icon to add filters that can be used to slice-and-dice your data! Maybe filter by user_id to see where an individual is liking the most homes! It's up to you! Feel free to reference the dashboard in the `./solutions` folder for more ideas if you wish!\n\n## 4) Share!\n\nThe next time you deploy your DAB, you will get a published version of this dashboard that you can share with other participants! Flex your creativity and show your stuff!"
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 7,
+        "width" : 6,
+        "height" : 11
+      }
+    } ],
+    "pageType" : "PAGE_TYPE_CANVAS"
+  } ]
+}

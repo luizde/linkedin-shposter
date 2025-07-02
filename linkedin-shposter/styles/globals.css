@@ -1,0 +1,22 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+  background: #F5F5F5;
+  color: #228B22;
+}
+
+a {
+  color: #32CD32;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #228B22;
+}
+
+* {
+  box-sizing: border-box;
+}

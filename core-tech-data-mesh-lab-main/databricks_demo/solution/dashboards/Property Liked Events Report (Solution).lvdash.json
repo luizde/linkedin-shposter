@@ -1,0 +1,626 @@
+{
+  "datasets" : [ {
+    "name" : "0884c56a",
+    "displayName" : "property_liked_events_gold",
+    "query" : "-- Boilerplate code provided to ensure dashboard works for all lab participants.\nDECLARE schema_name STRING;\nSET var schema_name = CONCAT('u_', split_part(current_user(), \"@\", 1));\n\nSELECT *, CONCAT(city, ', ', state) as full_city FROM IDENTIFIER('sandbox_core_tech.' || schema_name || '.property_liked_events_gold')\n\n\n-- Simplify this code by deleting all above code and using the following query (with your username substituted):\n\n-- SELECT * FROM sandbox_core_tech.u_REPLACE-WITH-YOUR-USERNAME.property_liked_events_gold"
+  } ],
+  "pages" : [ {
+    "name" : "54de0c45",
+    "displayName" : "Overview",
+    "layout" : [ {
+      "widget" : {
+        "name" : "0090138f",
+        "textbox_spec" : "# Property Liked Events Report (Soution)\n\nThis dashboard was created as a part of the **2025 Core Tech ZRetreat - Data Mesh Lab**. Attendees can use this dashboard to explore opportunities to visualize and derive insights from `property-liked` events ingested from the Event Platform.\n\n---\n\n\n## Organization\nThis is a high-level overview of how AI/BI Dashboards are laid out in Databricks.\n\n### Canvas\nThe **Canvas** tab provides tooling to create filters and visualizations of your data! Some samples have been provided below, feel empowered to modify these or add more with the **Chart** icon at the bottom of the page. Visualization options are documented in the [Databricks docs portal](https://docs.databricks.com/gcp/en/dashboards/visualizations/types).\n\n### Data\nThe **Data** tab includes the datasets that back the visualizations in the canvas. These datasets are named queries that can be referenced in your dashboards. A sample has been provided, but you can always add more as desired to improve or enable new visualizations, such as `Top 10 Liked Homes`."
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 0,
+        "width" : 6,
+        "height" : 7
+      }
+    }, {
+      "widget" : {
+        "name" : "4099052a",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "latitude",
+              "expression" : "`latitude`"
+            }, {
+              "name" : "longitude",
+              "expression" : "`longitude`"
+            }, {
+              "name" : "count(*)",
+              "expression" : "COUNT(`*`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "symbol-map",
+          "encodings" : {
+            "coordinates" : {
+              "latitude" : {
+                "fieldName" : "latitude",
+                "displayName" : "latitude"
+              },
+              "longitude" : {
+                "fieldName" : "longitude",
+                "displayName" : "longitude"
+              }
+            },
+            "size" : {
+              "fieldName" : "count(*)",
+              "scale" : {
+                "type" : "quantitative"
+              },
+              "displayName" : "Count of Records"
+            }
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "Like activity across the Nation!"
+          }
+        }
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 9,
+        "width" : 6,
+        "height" : 11
+      }
+    }, {
+      "widget" : {
+        "name" : "03d1b39b",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "hourly(liked_at)",
+              "expression" : "DATE_TRUNC(\"HOUR\", `liked_at`)"
+            }, {
+              "name" : "count(*)",
+              "expression" : "COUNT(`*`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 3,
+          "widgetType" : "bar",
+          "encodings" : {
+            "x" : {
+              "fieldName" : "hourly(liked_at)",
+              "scale" : {
+                "type" : "temporal"
+              },
+              "displayName" : "Time"
+            },
+            "y" : {
+              "fieldName" : "count(*)",
+              "scale" : {
+                "type" : "quantitative"
+              },
+              "displayName" : "Number of Likes"
+            }
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "Hourly Like Events"
+          },
+          "mark" : {
+            "colors" : [ {
+              "themeColorType" : "visualizationColors",
+              "position" : 6
+            }, {
+              "themeColorType" : "visualizationColors",
+              "position" : 2
+            }, {
+              "themeColorType" : "visualizationColors",
+              "position" : 3
+            }, {
+              "themeColorType" : "visualizationColors",
+              "position" : 4
+            }, {
+              "themeColorType" : "visualizationColors",
+              "position" : 5
+            }, {
+              "themeColorType" : "visualizationColors",
+              "position" : 6
+            }, {
+              "themeColorType" : "visualizationColors",
+              "position" : 7
+            }, {
+              "themeColorType" : "visualizationColors",
+              "position" : 8
+            }, {
+              "themeColorType" : "visualizationColors",
+              "position" : 9
+            }, {
+              "themeColorType" : "visualizationColors",
+              "position" : 10
+            } ]
+          }
+        }
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 20,
+        "width" : 6,
+        "height" : 10
+      }
+    }, {
+      "widget" : {
+        "name" : "f4ffe295",
+        "queries" : [ {
+          "name" : "dashboards/01f0366b3f9913daad2cf38df7356312/datasets/01f0366b3f991a828e28b4e7736fad27_user_id",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "user_id",
+              "expression" : "`user_id`"
+            }, {
+              "name" : "user_id_associativity",
+              "expression" : "COUNT_IF(`associative_filter_predicate_group`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "filter-multi-select",
+          "encodings" : {
+            "fields" : [ {
+              "fieldName" : "user_id",
+              "displayName" : "user_id",
+              "queryName" : "dashboards/01f0366b3f9913daad2cf38df7356312/datasets/01f0366b3f991a828e28b4e7736fad27_user_id"
+            } ]
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "User"
+          }
+        }
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 7,
+        "width" : 2,
+        "height" : 1
+      }
+    }, {
+      "widget" : {
+        "name" : "a9bdbb04",
+        "queries" : [ {
+          "name" : "dashboards/01f0366b3f9913daad2cf38df7356312/datasets/01f0366b3f991a828e28b4e7736fad27_full_city",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "full_city",
+              "expression" : "`full_city`"
+            }, {
+              "name" : "full_city_associativity",
+              "expression" : "COUNT_IF(`associative_filter_predicate_group`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "filter-multi-select",
+          "encodings" : {
+            "fields" : [ {
+              "fieldName" : "full_city",
+              "displayName" : "full_city",
+              "queryName" : "dashboards/01f0366b3f9913daad2cf38df7356312/datasets/01f0366b3f991a828e28b4e7736fad27_full_city"
+            } ]
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "City"
+          }
+        }
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 8,
+        "width" : 2,
+        "height" : 1
+      }
+    }, {
+      "widget" : {
+        "name" : "291025d3",
+        "queries" : [ {
+          "name" : "dashboards/01f0366b3f9913daad2cf38df7356312/datasets/01f0366b3f991a828e28b4e7736fad27_state",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "state",
+              "expression" : "`state`"
+            }, {
+              "name" : "state_associativity",
+              "expression" : "COUNT_IF(`associative_filter_predicate_group`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "filter-multi-select",
+          "encodings" : {
+            "fields" : [ {
+              "fieldName" : "state",
+              "displayName" : "state",
+              "queryName" : "dashboards/01f0366b3f9913daad2cf38df7356312/datasets/01f0366b3f991a828e28b4e7736fad27_state"
+            } ]
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "State"
+          }
+        }
+      },
+      "position" : {
+        "x" : 2,
+        "y" : 8,
+        "width" : 2,
+        "height" : 1
+      }
+    }, {
+      "widget" : {
+        "name" : "01dd33e5",
+        "queries" : [ {
+          "name" : "dashboards/01f0366b3f9913daad2cf38df7356312/datasets/01f0366b3f991a828e28b4e7736fad27_zipcode",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "zipcode",
+              "expression" : "`zipcode`"
+            }, {
+              "name" : "zipcode_associativity",
+              "expression" : "COUNT_IF(`associative_filter_predicate_group`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "filter-multi-select",
+          "encodings" : {
+            "fields" : [ {
+              "fieldName" : "zipcode",
+              "displayName" : "zipcode",
+              "queryName" : "dashboards/01f0366b3f9913daad2cf38df7356312/datasets/01f0366b3f991a828e28b4e7736fad27_zipcode"
+            } ]
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "Zipcode"
+          }
+        }
+      },
+      "position" : {
+        "x" : 4,
+        "y" : 8,
+        "width" : 2,
+        "height" : 1
+      }
+    }, {
+      "widget" : {
+        "name" : "4cde31e7",
+        "textbox_spec" : "## Liked Property Details\n\n---\n\nDetailed look at the liked properties in this report"
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 30,
+        "width" : 6,
+        "height" : 3
+      }
+    }, {
+      "widget" : {
+        "name" : "5e7632a1",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "avg(price)",
+              "expression" : "AVG(`price`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "counter",
+          "encodings" : {
+            "value" : {
+              "fieldName" : "avg(price)",
+              "format" : {
+                "type" : "number-currency",
+                "currencyCode" : "USD",
+                "abbreviation" : "compact",
+                "decimalPlaces" : {
+                  "type" : "max",
+                  "places" : 2
+                }
+              },
+              "displayName" : "Average price"
+            }
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "Average Price of Liked Properties"
+          }
+        }
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 33,
+        "width" : 2,
+        "height" : 6
+      }
+    }, {
+      "widget" : {
+        "name" : "e52a403f",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "min(price)",
+              "expression" : "MIN(`price`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "counter",
+          "encodings" : {
+            "value" : {
+              "fieldName" : "min(price)",
+              "format" : {
+                "type" : "number-currency",
+                "currencyCode" : "USD",
+                "abbreviation" : "compact",
+                "decimalPlaces" : {
+                  "type" : "max",
+                  "places" : 2
+                }
+              },
+              "displayName" : "Minimum price"
+            }
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "Min Price of Liked Properties"
+          }
+        }
+      },
+      "position" : {
+        "x" : 2,
+        "y" : 33,
+        "width" : 2,
+        "height" : 6
+      }
+    }, {
+      "widget" : {
+        "name" : "99e03be3",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "max(price)",
+              "expression" : "MAX(`price`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "counter",
+          "encodings" : {
+            "value" : {
+              "fieldName" : "max(price)",
+              "format" : {
+                "type" : "number-currency",
+                "currencyCode" : "USD",
+                "abbreviation" : "compact",
+                "decimalPlaces" : {
+                  "type" : "max",
+                  "places" : 2
+                }
+              },
+              "displayName" : "Maximum price"
+            }
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "Max Price of Liked Properties"
+          }
+        }
+      },
+      "position" : {
+        "x" : 4,
+        "y" : 33,
+        "width" : 2,
+        "height" : 6
+      }
+    }, {
+      "widget" : {
+        "name" : "51049202",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "avg(sqft)",
+              "expression" : "AVG(`sqft`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "counter",
+          "encodings" : {
+            "value" : {
+              "fieldName" : "avg(sqft)",
+              "format" : {
+                "type" : "number-plain",
+                "abbreviation" : "compact",
+                "decimalPlaces" : {
+                  "type" : "max",
+                  "places" : 2
+                }
+              },
+              "displayName" : "Average sqft"
+            }
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "Average Size of Liked Properties"
+          }
+        }
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 39,
+        "width" : 2,
+        "height" : 6
+      }
+    }, {
+      "widget" : {
+        "name" : "e12ec3aa",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "avg(bedrooms)",
+              "expression" : "AVG(`bedrooms`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "counter",
+          "encodings" : {
+            "value" : {
+              "fieldName" : "avg(bedrooms)",
+              "format" : {
+                "type" : "number-plain",
+                "abbreviation" : "compact",
+                "decimalPlaces" : {
+                  "type" : "max",
+                  "places" : 2
+                }
+              },
+              "displayName" : "Average bedrooms"
+            }
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "Average Num Bedrooms"
+          }
+        }
+      },
+      "position" : {
+        "x" : 2,
+        "y" : 39,
+        "width" : 2,
+        "height" : 6
+      }
+    }, {
+      "widget" : {
+        "name" : "86b976a8",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "avg(bathrooms)",
+              "expression" : "AVG(`bathrooms`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "counter",
+          "encodings" : {
+            "value" : {
+              "fieldName" : "avg(bathrooms)",
+              "format" : {
+                "type" : "number-plain",
+                "abbreviation" : "compact",
+                "decimalPlaces" : {
+                  "type" : "max",
+                  "places" : 2
+                }
+              },
+              "displayName" : "Average bathrooms"
+            }
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "Average Num Bathrooms"
+          }
+        }
+      },
+      "position" : {
+        "x" : 4,
+        "y" : 39,
+        "width" : 2,
+        "height" : 6
+      }
+    }, {
+      "widget" : {
+        "name" : "bb90a4fd",
+        "queries" : [ {
+          "name" : "dashboards/01f0366b3f9913daad2cf38df7356312/datasets/01f0366b3f991a828e28b4e7736fad27_liked_at",
+          "query" : {
+            "datasetName" : "0884c56a",
+            "fields" : [ {
+              "name" : "liked_at",
+              "expression" : "`liked_at`"
+            }, {
+              "name" : "liked_at_associativity",
+              "expression" : "COUNT_IF(`associative_filter_predicate_group`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "filter-date-range-picker",
+          "encodings" : {
+            "fields" : [ {
+              "fieldName" : "liked_at",
+              "displayName" : "liked_at",
+              "queryName" : "dashboards/01f0366b3f9913daad2cf38df7356312/datasets/01f0366b3f991a828e28b4e7736fad27_liked_at"
+            } ]
+          },
+          "frame" : {
+            "showTitle" : true,
+            "title" : "Timeframe"
+          }
+        }
+      },
+      "position" : {
+        "x" : 2,
+        "y" : 7,
+        "width" : 4,
+        "height" : 1
+      }
+    } ],
+    "pageType" : "PAGE_TYPE_CANVAS"
+  } ]
+}

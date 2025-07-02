@@ -1,0 +1,576 @@
+.container {
+    padding: 0 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    background: #F5F5F5;
+    min-height: 100vh;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    position: relative;
+  }
+  
+  .main {
+    min-height: 100vh;
+    padding: 4rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+    align-items: center;
+  }
+
+  .inputSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .outputSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .title {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 3rem;
+    text-align: center;
+    color: white;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-family: 'Optima', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #ff6347;
+    padding: 1.5rem 2rem;
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(255, 99, 71, 0.3);
+  }
+  
+  .description {
+    text-align: center;
+    line-height: 1.5;
+    font-size: 1.2rem;
+    color: #32CD32;
+    margin-bottom: 2.5rem;
+    font-weight: 500;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+  }
+
+  .footerContainer {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .donation {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .donation p {
+    margin-bottom: 1rem;
+    color: #228B22;
+    font-weight: 500;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+  }
+
+  .whyFishit {
+    background: #98FB98;
+    border: 3px solid #228B22;
+    border-radius: 15px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 6px 12px rgba(34, 139, 34, 0.2);
+    transform: rotate(-1deg);
+    transition: transform 0.3s ease;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .whyFishit:hover {
+    transform: rotate(0deg);
+  }
+
+  .whyFishitTitle {
+    color: #228B22;
+    font-size: 1.3rem;
+    margin: 0 0 1rem 0;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+  }
+
+  .whyFishitList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .whyFishitList li {
+    color: #228B22;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.4;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+  }
+
+  .whyFishitList li:before {
+    content: "🐟";
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .whyFishitList li strong {
+    color: #FF6347;
+    font-weight: bold;
+  }
+  
+  .form {
+    width: 100%;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .inputGroup {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #228B22;
+    font-weight: bold;
+    font-size: 1rem;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 3px solid #32CD32;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    resize: vertical;
+    min-height: 80px;
+    background: white;
+    color: #228B22;
+  }
+  
+  .textarea:focus {
+    outline: none;
+    border-color: #228B22;
+    box-shadow: 0 0 0 4px rgba(50, 205, 50, 0.2);
+  }
+
+  .textInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+    border: 3px solid #32CD32;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    background: white;
+    color: #228B22;
+    box-sizing: border-box;
+  }
+
+  .textInput:focus {
+    outline: none;
+    border-color: #228B22;
+    box-shadow: 0 0 0 4px rgba(50, 205, 50, 0.2);
+  }
+
+  .inputWithButton {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .textInputHalf {
+    flex: 1;
+    max-width: 50%;
+    padding: 1rem;
+    border: 3px solid #32CD32;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    background: white;
+    color: #228B22;
+    box-sizing: border-box;
+  }
+
+  .textInputHalf:focus {
+    outline: none;
+    border-color: #228B22;
+    box-shadow: 0 0 0 4px rgba(50, 205, 50, 0.2);
+  }
+
+  .selectInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+    border: 3px solid #32CD32;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    background: white;
+    color: #228B22;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  .selectInput:focus {
+    outline: none;
+    border-color: #228B22;
+    box-shadow: 0 0 0 4px rgba(50, 205, 50, 0.2);
+  }
+
+  .selectInput option {
+    background: white;
+    color: #228B22;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+  }
+  
+  .suggestions {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .suggestions p {
+    margin-bottom: 0.5rem;
+    color: #32CD32;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+  }
+  
+  .suggestionBtn {
+    background: #98FB98;
+    border: 3px solid #32CD32;
+    color: #228B22;
+    padding: 0.75rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    transition: all 0.3s ease;
+    transform: scale(1);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  .suggestionBtn:hover {
+    background: #228B22;
+    color: #98FB98;
+    border-color: #228B22;
+    transform: scale(1.05);
+  }
+  
+  .generateBtn {
+    width: 100%;
+    background: #228B22;
+    color: #F0FFF0;
+    border: none;
+    padding: 1.2rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: scale(1);
+  }
+  
+  .generateBtn:hover:not(:disabled) {
+    background: #32CD32;
+    transform: scale(1.02);
+  }
+  
+  .generateBtn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: scale(1);
+  }
+  
+  .error {
+    width: 100%;
+    background: #FFE4E1;
+    border: 3px solid #FF6347;
+    color: #8B0000;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+  }
+  
+  .result {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .result h3 {
+    margin-bottom: 1rem;
+    color: #228B22;
+    font-size: 1.4rem;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+  }
+  
+  .postContainer {
+    position: relative;
+    background: white;
+    border: 3px solid #32CD32;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 12px rgba(34, 139, 34, 0.2);
+  }
+  
+  .generatedPost {
+    white-space: pre-wrap;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    margin-bottom: 1rem;
+    color: #228B22;
+  }
+  
+  .copyBtn {
+    background: #98FB98;
+    color: #228B22;
+    border: 3px solid #32CD32;
+    padding: 0.75rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    transition: all 0.3s ease;
+    transform: scale(1);
+  }
+  
+  .copyBtn:hover {
+    background: #228B22;
+    color: #98FB98;
+    border-color: #228B22;
+    transform: scale(1.05);
+  }
+  
+  .donateBtn {
+    background: #FF6347;
+    color: #F0FFF0;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Comic Sans MS', cursive, sans-serif;
+    transition: all 0.3s ease;
+    display: inline-block;
+    transform: scale(1);
+  }
+  
+  .donateBtn:hover {
+    background: #FF4500;
+    transform: scale(1.05);
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1024px) {
+    .contentContainer {
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .outputSection {
+      position: static;
+    }
+
+    .inputSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .inputGroup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .label {
+      text-align: center;
+      width: 100%;
+    }
+
+    .textInput, .selectInput {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .footerContainer {
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .donation {
+      margin-top: 0;
+    }
+
+    .whyFishit {
+      transform: rotate(0deg);
+      margin: 0 auto;
+      max-width: 600px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2rem;
+    }
+    
+    .container {
+      padding: 0 1rem;
+    }
+    
+    .main {
+      padding: 2rem 0;
+    }
+
+    .contentContainer {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .inputSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .label {
+      text-align: center;
+      width: 100%;
+    }
+
+    .inputGroup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .inputWithButton {
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 400px;
+      align-items: center;
+    }
+
+    .textInputHalf {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .textInput, .selectInput {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .generateBtn {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .footerContainer {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .donation {
+      margin-top: 0;
+    }
+
+    .whyFishit {
+      padding: 1.5rem;
+      transform: rotate(0deg);
+      margin: 0 auto;
+      max-width: none;
+    }
+
+    .whyFishitTitle {
+      font-size: 1.3rem;
+    }
+
+    .suggestionBtn, .copyBtn {
+      transform: scale(1);
+    }
+
+    .suggestionBtn:hover, .copyBtn:hover {
+      transform: scale(1);
+    }
+  }

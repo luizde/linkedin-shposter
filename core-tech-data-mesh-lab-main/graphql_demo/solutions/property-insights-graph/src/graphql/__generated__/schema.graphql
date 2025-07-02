@@ -1,0 +1,36 @@
+schema @link(url: "https://specs.apollo.dev/federation/v2.8", import: ["@key"]) {
+  query: Query
+}
+
+type Book {
+  author: String
+  title: String
+}
+
+type Images {
+  alt: String
+  id: ID!
+  url: String
+}
+
+type Property {
+  address: String
+  bathrooms: Float
+  bedrooms: Float
+  city: String
+  description: String
+  images: [Images]
+  price: Int
+  sqft: Int
+  zpid: ID!
+}
+
+type Query {
+  books: [Book]
+  propertyInsights(userId: ID!): UserPropertyInsights
+}
+
+type UserPropertyInsights @key(fields: "userId") {
+  propertyInfo: [Property]
+  userId: ID!
+}
