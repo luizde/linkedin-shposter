@@ -1,6 +1,0 @@
-src/graphql/__generated__
-dist/
-package.json
-package-lock.json
-tsconfig.json
-jest.config.js
