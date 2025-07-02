@@ -4,6 +4,60 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// Rate limiting: In-memory storage
+const rateLimitMap = new Map();
+
+// Rate limiting function
+function checkRateLimit(clientKey, isSuspicious = false) {
+  const now = Date.now();
+  
+  // Different limits for normal vs suspicious users
+  const limits = isSuspicious 
+    ? { maxRequests: 3, windowMs: 5 * 60 * 1000 } // 3 requests per 5 minutes for suspicious
+    : { maxRequests: 10, windowMs: 60 * 1000 };    // 10 requests per minute for normal
+  
+  const clientData = rateLimitMap.get(clientKey) || { 
+    count: 0, 
+    resetTime: now + limits.windowMs,
+    suspicious: isSuspicious 
+  };
+  
+  // Reset if window expired
+  if (now > clientData.resetTime) {
+    clientData.count = 0;
+    clientData.resetTime = now + limits.windowMs;
+    clientData.suspicious = isSuspicious; // Update suspicious status
+  }
+  
+  // If user becomes suspicious, immediately apply stricter limits
+  if (isSuspicious && !clientData.suspicious) {
+    clientData.suspicious = true;
+    clientData.resetTime = now + limits.windowMs; // Reset window with stricter timing
+  }
+  
+  clientData.count++;
+  rateLimitMap.set(clientKey, clientData);
+  
+  const currentLimit = clientData.suspicious ? 3 : limits.maxRequests;
+  
+  return {
+    allowed: clientData.count <= currentLimit,
+    remaining: Math.max(0, currentLimit - clientData.count),
+    resetTime: clientData.resetTime,
+    isSuspicious: clientData.suspicious
+  };
+}
+
+// Get client fingerprint
+function getClientFingerprint(req) {
+  const forwarded = req.headers['x-forwarded-for'];
+  const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
+  const userAgent = req.headers['user-agent'] || '';
+  
+  // Create composite key using IP and first 50 chars of user agent
+  return `${ip}_${userAgent.substring(0, 50)}`;
+}
+
 // Security: Input sanitization patterns
 const INJECTION_PATTERNS = [
   /ignore\s+(previous|all|above|prior)\s+(instructions?|prompts?|commands?)/gi,
@@ -132,6 +186,26 @@ export default async function handler(req, res) {
   }
 
   const { topic, industry, tone } = req.body;
+
+  // Rate limiting: Get client fingerprint
+  const clientKey = getClientFingerprint(req);
+  
+  // Check for suspicious patterns first
+  const isSuspicious = detectInjectionAttempt(topic) || detectInjectionAttempt(industry);
+  
+  // Apply rate limiting
+  const rateLimitResult = checkRateLimit(clientKey, isSuspicious);
+  
+  if (!rateLimitResult.allowed) {
+    const resetTimeSeconds = Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000);
+    const limitType = rateLimitResult.isSuspicious ? 'strict' : 'normal';
+    
+    return res.status(429).json({ 
+      error: `Rate limit exceeded. ${rateLimitResult.isSuspicious ? 'Suspicious activity detected. ' : ''}Please try again in ${resetTimeSeconds} seconds.`,
+      retryAfter: resetTimeSeconds,
+      limitType
+    });
+  }
 
   // Input validation
   if (!topic || typeof topic !== 'string' || topic.trim().length === 0) {
