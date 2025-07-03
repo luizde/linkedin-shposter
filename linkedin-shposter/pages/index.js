@@ -3,13 +3,15 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
-  const [topic, setTopic] = useState('');
-  const [industry, setIndustry] = useState('Software Engineering');
+  const [topic, setTopic] = useState("");
+  const [industry, setIndustry] = useState("");
   const [tone, setTone] = useState('Reflective & Insightful');
   const [generatedPost, setGeneratedPost] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [isCopied, setIsCopied] = useState(false);
+  const [hasTopicInputBeenFocused, setHasTopicInputBeenFocused] = useState(false);
+  const [hasIndustryInputBeenFocused, setHasIndustryInputBeenFocused] = useState(false);
 
   const suggestions = [
     "Folding laundry",
@@ -182,6 +184,11 @@ export default function Home() {
                     type="text"
                     value={topic}
                     onChange={(e) => setTopic(e.target.value)}
+                    onFocus={() => {
+                      if (!hasTopicInputBeenFocused) {
+                        setHasTopicInputBeenFocused(true);
+                      }
+                    }}
                     placeholder="Enter a topic from your daily life..."
                     className={styles.textInputHalf}
                     maxLength={500}
@@ -202,6 +209,11 @@ export default function Home() {
                   type="text"
                   value={industry}
                   onChange={(e) => setIndustry(e.target.value)}
+                  onFocus={() => {
+                    if (!hasIndustryInputBeenFocused) {
+                      setHasIndustryInputBeenFocused(true);
+                    }
+                  }}
                   placeholder="e.g., Software Engineering, Marketing, Healthcare..."
                   className={styles.textInput}
                   maxLength={100}
